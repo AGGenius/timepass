@@ -5,11 +5,7 @@ const validateTime = (req, res, next) => {
 
     res.locals.mensaje = "Aún no es la hora, espera a las 12:00 para poder entrar. "
 
-    if(actualHour >= minHour){  
-        next();
-    } else {
-        res.redirect("/?mensaje=" + encodeURIComponent(res.locals.mensaje));
-    }
+    actualHour >= minHour ? next() : res.redirect("/?mensaje=" + encodeURIComponent(res.locals.mensaje));
 };
 
 module.exports = validateTime;
