@@ -3,25 +3,12 @@ const validateTime = (req, res, next) => {
     const actualHour = now.getHours();
     const minHour = 12;
 
-    if (req._parsedUrl.path === "/") {
-        if(actualHour >= minHour){  
-            req.isValid = true;
-            req.message = "";
-        } else {
-            req.isValid = false;
-            req.message = "Aún no es la hora, tienes que esperar hasta las 12:00. ";
-        }
-    
+    res.locals.mensaje = "Aún no es la hora, espera a las 12:00 para poder entrar. "
+
+    if(actualHour >= minHour){  
         next();
-    } else if (req._parsedUrl.path === "/endroute") {
-        if(actualHour >= minHour){  
-            next();
-        } else {
-            //res.redirect("/");
-            req.isValid = false;
-            req.message = "Aún no es la hora, tienes que esperar hasta las 12:00. ";
-            return;
-        }
+    } else {
+        res.redirect("/?mensaje=" + encodeURIComponent(res.locals.mensaje));
     }
 };
 

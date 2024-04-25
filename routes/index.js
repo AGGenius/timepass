@@ -13,19 +13,7 @@ router.get('/', (req, res) => {
     <body>      
         <h1>Bienvenido a mi web</h1>
         <p>La hora actual es: ${req.actualTime}</p>
-        <span></span><button>Entrar</button>
-        <script>
-        
-            const button = document.querySelector('button');
-            const messageWrap = document.querySelector('span');
-
-            button.addEventListener('click', () => {
-                if(${req.isValid}) {
-                    window.location.href = "/endroute";
-                } 
-                messageWrap.textContent = "${req.message}";
-            });
-        </script>
+        <span>${req.query.mensaje ? req.query.mensaje : ""}</span><a href="/endroute"><button>Entrar</button></a>
     </body>
     </html>
     `);
